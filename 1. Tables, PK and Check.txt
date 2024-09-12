@@ -1,0 +1,176 @@
+-- 1. Creation of tables, with the restrictions of PK and CHECK.
+
+-- The tables of the model are created
+
+-- As the name is a candidate key, we put it as unique and not null
+
+create table pharmacy(
+code number(6),
+name varchar2(30) unique not null,
+address varchar2(30),
+email varchar2(30),
+schedule_code number(4),
+catalogue_code number(4),
+constraint pharmacy_pk primary key (code));
+
+-- As the pharmacies and laboratories can have various phone numbers, tables with the code and the number are created. 
+-- In order for them to work properly, both attributes are in the primary key.
+
+create table pharmacy_phone(
+pharmacy_code number(6),
+"NUMBER" number(9),
+constraint pharmacy_phone_pk primary key (pharmacy_code, "NUMBER"));
+
+create table laboratory_phone(
+lab_name varchar2(30),
+"NUMBER" number(9),
+constraint laboratory_phone_pk primary key (lab_name,"NUMBER"));
+
+-- Although in the model is not specified that the DNI is a candidate key, it must be unique
+
+create table employee(
+dni varchar2(30) unique,
+name varchar2(30),
+lastname varchar2(30),
+birthdate date,
+ssn number(9),
+shift_code number(6),
+super_ssn number(9),
+pharmacy_code number(6),
+constraint employee_pk primary key (ssn));
+
+-- Both the shifts and schedules need a good description of the time they start and end, and how they work, so these values cannot be empty
+
+create table shift(
+code number(6),
+"NAME" varchar2(30) not null,
+"START" varchar2(30) not null,
+"END" varchar2(30) not null,
+constraint shift_pk primary key (code));
+
+create table schedule(
+code number(6),
+"NAME" varchar2(30) not null,
+"START" varchar2(30) not null,
+"END" varchar2(30) not null,
+constraint schedule_pk primary key (code));
+
+-- In order for the medicines to be well defined, their excipients, ingredients and units must be included. Some are with foreign keys, and the rest with not null.
+
+create table medicine(
+code number(6),
+lab_name varchar2(30),
+commercial_brand varchar2(30),
+type_excipient number(6),
+unit_version number(3) not null,
+type_admin_code number(6),
+constraint medicine_pk primary key (code));
+
+-- In order to identify the types of administration the code cannot be the only attribute, so the name and format cannot be empty.
+
+create table type_administration(
+code number(4),
+name varchar2(30) not null,
+format varchar2(30) not null,
+constraint type_administration_pk primary key (code));
+
+-- The same as before happens with the type of excipient
+
+create table type_excipient(
+code number(6),
+name varchar2(30),
+format varchar2(30) not null,
+constraint type_excipient_pk primary key (code));
+
+create table laboratory(
+name varchar2(30),
+address varchar2(30),
+webpage varchar2(30),
+constraint laboratory_pk primary key (name));
+
+-- This is an intermediate table between the types of excipient and the medicines, so both attributes must belong to the primary key.
+
+create table medicine_type_excipient(
+type_excipient number(6),
+medicine_code number(6),
+constraint medicine_type_excipient_pk primary key (type_excipient, medicine_code));
+
+-- As the following table storages the stock, the quantity is crucial so it cannot be null.
+
+create table stock(
+code number(6),
+pharmacy_code number(6),
+medicine_code number(6),
+quantity number(4) not null,
+constraint stock_pk primary key (code));
+
+-- The following table is also an intermediate table.
+
+create table medicine_active_ingredients(
+medicine_code number(6),
+active_ingredient_code number(6),
+constraint medicine_active_ingredients_pk primary key (medicine_code, active_ingredient_code));
+
+-- The name of the active ingredient cannot be empty as it is necessary to be well recognised
+
+create table active_ingredients(
+code number(6),
+name varchar2(30) not null,
+constraint active_ingredients_pk primary key (code));
+
+create table distributor(
+cif varchar2(30),
+name varchar2(30),  
+webpage varchar2(30),
+constraint distributor_pk primary key (cif));
+ 
+-- The order table needs the dates, as if the difference between them is more than 2, the order cannot be placed, and the quantity is necessary
+
+create table "ORDER"(
+pharmacy_code number(6),
+medicine_code number(6),
+distributor_cif varchar2(30),
+order_date date not null,
+quantity number(4) not null,
+delivery_date date not null,
+employee_code number(9),
+constraint order_pk primary key (pharmacy_code, medicine_code, distributor_cif, order_date));
+
+create table catalogue(
+code number(6),
+constraint catalogue_pk primary key (code));
+
+-- The name is necessary to recognize the code 
+
+create table product(
+code number(6),
+category varchar2(30),
+name varchar2(30) not null,
+description varchar2(30),
+distributor_name varchar2(30),
+catalogue_code number(6),
+constraint product_pk primary key (code));
+
+-- This is another intermediate table
+
+create table product_company(
+product_code number(6),
+company_code varchar2(30),
+constraint product_company_pk primary key (product_code, company_code));
+
+create table company(
+cif varchar2(30),
+name varchar2(30),
+webpage varchar2(30),
+constraint company_pk primary key (cif));
+
+
+-- 2. CHECK CONSTRAINTS
+
+-- The name constraints that are specified in the model are created with a check constraint
+
+alter table type_administration add constraint type_administration_ch check (format in ('Orally', 'Intravenous'));
+
+alter table type_excipient add constraint type_excipient_ch check (format in ('Capsule', 'Tablet', 'Pill', 'Cream', 'Spray', 'Syrup'));
+
+alter table shift add constraint shift_ch check (name in ('Morning', 'Afternoon'));

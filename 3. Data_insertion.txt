@@ -1,0 +1,304 @@
+-- 3. Insertion of the records
+
+-- The pharmacy name is equal to the street name.
+
+insert into pharmacy values (1, 'A Street', 'A Street, 7', 'a.street@gmail.com', 2, 1);
+insert into pharmacy values (2, 'B Street', 'B Street, 1', 'b.street@gmail.com', 3, 2);
+insert into pharmacy values (3, 'C Street', 'C Street, 21', 'c.street@gmail.com', 3, 4);
+insert into pharmacy values (4, 'D Street', 'D Street, 1', 'd.street@gmail.com', 4, 5);
+insert into pharmacy values (5, 'E Street', 'E Street, 3', 'e.street@gmail.com', 5, 6);
+insert into pharmacy values (6, 'F Street', 'F Street, 90', 'f.street@gmail.com', 6, 7);
+insert into pharmacy values (7, 'G Street', 'G Street, 14', 'g.street@gmail.com', 2, 8);
+insert into pharmacy values (8, 'H Street', 'H Street, 1', 'h.street@gmail.com', 7, 9);
+insert into pharmacy values (9, 'I Street', 'I Street, 44', 'i.street@gmail.com', 2, 10);
+insert into pharmacy values (10, 'J Street', 'J Street, 25', 'j.street@gmail.com', 3, 3);
+
+insert into schedule values(1, 'Holidays', '09:00', '14:00');
+insert into schedule values(2, 'Monday-Friday', '08:00', '20:00');
+insert into schedule values(3, 'Every day', '00:00', '00:00');
+insert into schedule values(4, 'Morning weekdays', '08:00', '14:00');
+insert into schedule values(5, 'Afternoon weekdays', '16:00', '21:00');
+insert into schedule values(6, 'Morning weekends', '08:00', '14:00');
+insert into schedule values(7, 'Afternoon weekends', '16:00', '21:00');
+insert into schedule values(8, '1st January', '10:00', '14:00');
+insert into schedule values(9, '25th December', '10:00', '14:00');
+insert into schedule values(10, '6th January', '10:00', '14:00');
+
+insert into catalogue values (1);
+insert into catalogue values (2);
+insert into catalogue values (3);
+insert into catalogue values (4);
+insert into catalogue values (5);
+insert into catalogue values (6);
+insert into catalogue values (7);
+insert into catalogue values (8);
+insert into catalogue values (9);
+insert into catalogue values (10);
+
+-- The same pharmacy and laboratory may have various phone numbers 
+
+insert into pharmacy_phone values (1, 648365037);
+insert into pharmacy_phone values (1, 648365237);
+insert into pharmacy_phone values (2, 648365097);
+insert into pharmacy_phone values (3, 648385037);
+insert into pharmacy_phone values (4, 648965037);
+insert into pharmacy_phone values (4, 648365837);
+insert into pharmacy_phone values (4, 648365039);
+insert into pharmacy_phone values (5, 648365089);
+insert into pharmacy_phone values (6, 672365037);
+insert into pharmacy_phone values (7, 648327037);
+insert into pharmacy_phone values (7, 648365567);
+insert into pharmacy_phone values (8, 648363797);
+insert into pharmacy_phone values (9, 626965037);
+insert into pharmacy_phone values (10, 648368937);
+
+insert into laboratory_phone values ('Laboratory Express', 648358037);
+insert into laboratory_phone values ('Laboratory Express', 648375237);
+insert into laboratory_phone values ('Laboratory Cool', 648386497);
+insert into laboratory_phone values ('Laboratory Amazing', 630274836);
+insert into laboratory_phone values ('Laboratory Wonderful', 603785974);
+insert into laboratory_phone values ('Laboratory Wonderful', 639364983);
+insert into laboratory_phone values ('Laboratory Wonderful', 709383028);
+insert into laboratory_phone values ('Laboratory Nice', 639383939);
+insert into laboratory_phone values ('Laboratory Good', 699999999);
+insert into laboratory_phone values ('Laboratory Better', 662937292);
+insert into laboratory_phone values ('Laboratory Better', 611463813);
+insert into laboratory_phone values ('Laboratory 4U', 647161008);
+insert into laboratory_phone values ('Laboratory Miracles', 693729729);
+insert into laboratory_phone values ('Laboratory Remedies', 638272936);
+
+-- The employees only work in one pharmacy, which has one manager. Also, we took care that the schedule of the pharmacy is completely covered with the chosen schedule.
+
+insert into employee values ('79635685W', 'Juan Alberto', 'García', to_date('22/06/1994', 'dd/mm/yyyy'), 639357964, 3, 639357964, 1);
+insert into employee values ('53675685X', 'Sergio', 'García', to_date('23/05/1984','dd/mm/yyyy'), 639364895, 4, 639357964, 1);
+insert into employee values ('82685685L', 'Ibai', 'Garatea', to_date('26/03/1995','dd/mm/yyyy'), 639347964, 1, 634689964, 2);
+insert into employee values ('79635685L', 'Sara', 'Piñas', to_date('14/05/2003','dd/mm/yyyy'), 634689964, 2, 634689964, 2);
+insert into employee values ('97435685R', 'Rubén', 'Doblas', to_date('13/02/1990', 'dd/mm/yyyy'), 964257964, 1, 964257964, 3);
+insert into employee values ('86435685Q', 'Samuel', 'De Luque', to_date('22/06/1994', 'dd/mm/yyyy'), 639964964, 2, 964257964, 3);
+insert into employee values ('86432685C', 'Guillermo', 'Díaz', to_date('09/05/1993', 'dd/mm/yyyy'), 639457964, 5, 639457964, 4);
+insert into employee values ('97655685S', 'Manuel', 'Fernández', to_date('13/08/1990', 'dd/mm/yyyy'), 639308694, 6, 639308694, 5);
+insert into employee values ('74742685N', 'Raúl', 'Álvarez', to_date('22/06/1994', 'dd/mm/yyyy'), 639386464, 7, 639386464, 6);
+insert into employee values ('79635685P', 'Sara', 'Moledo', to_date('21/09/1991', 'dd/mm/yyyy'), 639362864, 3, 639362864, 7);
+insert into employee values ('35748685Z', 'Abril', 'Garza', to_date('28/02/1998', 'dd/mm/yyyy'), 639357964, 4, 639362864, 7);
+insert into employee values ('79635685B', 'Juan Alberto', 'García', to_date('22/06/1994', 'dd/mm/yyyy'), 639357964, 8, 639357964, 8);
+insert into employee values ('56735685A', 'Lucía', 'Pérez', to_date('14/02/1974', 'dd/mm/yyyy'), 635839964, 3, 635839964, 9);
+insert into employee values ('79635685M', 'Rosario', 'Gómez', to_date('13/11/1994', 'dd/mm/yyyy'), 567357964, 4, 635839964, 9);
+insert into employee values ('09835685G', 'Alba', 'Corona', to_date('18/11/2003', 'dd/mm/yyyy'), 639528996, 1, 639528996, 10);
+insert into employee values ('79635685T', 'Leonardo','Navarro', to_date('10/10/1960', 'dd/mm/yyyy'), 697867964, 2, 639528996, 10);
+insert into employee values('83754937A', 'Lorenzo', 'García', to_date('04/03/2000', 'dd/mm/yyyy'), 673546728, 3, 639357964, 1);
+
+-- The shifts were created with the objective of covering all the working hours of the pharmacies. Also, in order not to have any mistake at the check constraint, 
+-- all are in the morning or afternoon.
+
+insert into shift values(1,'Morning', '00:00', '12:00');
+insert into shift values(2, 'Afternoon', '12:00', '00:00');
+insert into shift values(3, 'Morning', '08:00', '14:00');
+insert into shift values(4, 'Afternoon', '14:00', '20:00');
+insert into shift values(5, 'Morning', '09:00', '14:00');
+insert into shift values(6, 'Afternoon', '16:00', '21:00');
+insert into shift values(7, 'Morning', '08:00', '15:00');
+insert into shift values(8, 'Afternoon', '16:00', '22:00');
+insert into shift values(9, 'Morning', '10:00', '14:00');
+insert into shift values(10, 'Morning', '10:00', '12:00');
+
+-- In the medicine tuples, it was taken care that the excipients and the administration methods make sense, so we don't have, for example, an intravenous tablet.
+
+insert into medicine values(1, 'Laboratory Express', 'Cialis', 1, 14, 1);
+insert into medicine values(2, 'Laboratory Express',  'Lyrica', 2, 20, 2);
+insert into medicine values(3, 'Laboratory Amazing',  'Eliquis', 4, 30, 9);
+insert into medicine values(4, 'Laboratory Wonderful', 'Generic_Ibuprofen', 5, 40, 7);
+insert into medicine values(5, 'Laboratory Wonderful', 'Humira', 7, 100, 1);
+insert into medicine values(6, 'Laboratory Wonderful', 'Generic Paracetamol', 9, 10, 3);
+insert into medicine values(7, 'Laboratory Good', 'Latuda', 15, 20, 5);
+insert into medicine values(8, 'Laboratory Better',  'Xeljanz', 10, 15, 4);
+insert into medicine values(9, 'Laboratory Better',  'Celebrex', 1, 20, 1);
+insert into medicine values(10, 'Laboratory Remedies',  'Dexketoprofen', 12, 7, 3);
+
+insert into laboratory values ('Laboratory Express', 'Z Street, 46', 'laboratoryexpress.com');
+insert into laboratory values ('Laboratory Cool', 'W Street, 13', 'laboratorycool.com');
+insert into laboratory values ('Laboratory Amazing', 'X Street, 51', 'laboratoryamazing.com');
+insert into laboratory values ('Laboratory Wonderful', 'Y Street, 9', 'laboratorywonderful.com');
+insert into laboratory values ('Laboratory Nice', 'P Street, 1', 'laboratorynice.com');
+insert into laboratory values ('Laboratory Good', 'Q Street, 48', 'laboratorygood.com');
+insert into laboratory values ('Laboratory Better', 'R Street, 3', 'laboratorybetter.com');
+insert into laboratory values ('Laboratory 4U', 'S Street, 12', 'laboratory4u.com');
+insert into laboratory values ('Laboratory Miracles', 'T Street, 35', 'laboratorymiracles.com');
+insert into laboratory values ('Laboratory Remedies', 'O Street, 67', 'laboratoryremedies.com');
+
+-- This class also had a check contraint that was taken into account in order to create the values.
+
+insert into type_excipient values(1, 'Aspartame and phenylalanine', 'Capsule');
+insert into type_excipient values(2, 'Benzalkonium chloride', 'Tablet');
+insert into type_excipient values(3, 'Benzoic acid and benzoates', 'Pill');
+insert into type_excipient values(4, 'Benzyl alcohol', 'Cream');
+insert into type_excipient values(5, 'Boric acid and borates', 'Spray');
+insert into type_excipient values(6, 'Cyclodextrins', 'Syrup');
+insert into type_excipient values(7, 'Dextrans', 'Capsule');
+insert into type_excipient values(8, 'Ethanol', 'Tablet');
+insert into type_excipient values(9, 'Fragrance allergens', 'Tablet');
+insert into type_excipient values(10, 'Fructose and sorbitol', 'Pill');
+insert into type_excipient values(11, 'Lactose', 'Cream');
+insert into type_excipient values(12, 'Phosphates', 'Tablet');
+insert into type_excipient values(13, 'Polysorbates', 'Pill');
+insert into type_excipient values(14, 'Proline', 'Spray');
+insert into type_excipient values(15, 'Propylene glycol and esters', 'Syrup');
+
+-- Each medicine can have several type excipients
+
+insert into medicine_type_excipient values(1, 1);
+insert into medicine_type_excipient values(7, 1);
+insert into medicine_type_excipient values(2, 2);
+insert into medicine_type_excipient values(8, 2);
+insert into medicine_type_excipient values(10, 3);
+insert into medicine_type_excipient values(6, 4);
+insert into medicine_type_excipient values(15, 4);
+insert into medicine_type_excipient values(14, 5);
+insert into medicine_type_excipient values(11, 6);
+insert into medicine_type_excipient values(2, 7);
+insert into medicine_type_excipient values(12, 7);
+insert into medicine_type_excipient values(8, 7);
+insert into medicine_type_excipient values(1, 8);
+insert into medicine_type_excipient values(4, 9);
+insert into medicine_type_excipient values(3, 10);
+insert into medicine_type_excipient values(13, 10);
+
+insert into type_administration values(1, 'Capsule', 'Orally');
+insert into type_administration values(2, 'Tablet', 'Orally');
+insert into type_administration values(3, 'Tablet', 'Intravenous');
+insert into type_administration values(4,  'Pill', 'Orally');
+insert into type_administration values(5, 'Syrup', 'Orally');
+insert into type_administration values(6, 'Syrup', 'Intravenous');
+insert into type_administration values(7, 'Spray', 'Orally');
+insert into type_administration values(8, 'Spray', 'Intravenous');
+insert into type_administration values(9, 'Cream', 'Orally');
+insert into type_administration values(10, 'Cream', 'Intravenous');
+
+insert into active_ingredients values(1, 'acalabrutinib');
+insert into active_ingredients values(2, 'cabergoline');
+insert into active_ingredients values(3, 'edotreotide');
+insert into active_ingredients values(4, 'fluorouracil');
+insert into active_ingredients values(5, 'ganciclovir');
+insert into active_ingredients values(6, 'heparinoid');
+insert into active_ingredients values(7, 'ketoprofen');
+insert into active_ingredients values(8, 'alkylation');
+insert into active_ingredients values(9, 'linezolid');
+insert into active_ingredients values(10, 'manganese');
+insert into active_ingredients values(11, 'naproxen');
+insert into active_ingredients values(12, 'pancreatin');
+insert into active_ingredients values(13, 'rilpivirine');
+
+-- Each medicine can have several active ingredients.
+
+insert into medicine_active_ingredients values(1, 1);
+insert into medicine_active_ingredients values(2, 1);
+insert into medicine_active_ingredients values(2, 2);
+insert into medicine_active_ingredients values(3, 3);
+insert into medicine_active_ingredients values(4, 2);
+insert into medicine_active_ingredients values(4, 5);
+insert into medicine_active_ingredients values(4, 7);
+insert into medicine_active_ingredients values(5, 8);
+insert into medicine_active_ingredients values(6, 4);
+insert into medicine_active_ingredients values(7, 3);
+insert into medicine_active_ingredients values(7, 5);
+insert into medicine_active_ingredients values(8, 8);
+insert into medicine_active_ingredients values(9, 9);
+insert into medicine_active_ingredients values(10, 1);
+insert into medicine_active_ingredients values(10, 10);
+
+-- Each pharmacy has various medications assigned with different quantites.
+ 
+insert into stock values(1, 1, 2, 20);
+insert into stock values(2, 1, 3, 50);
+insert into stock values(3, 2, 7, 70);
+insert into stock values(4, 3, 8, 35);
+insert into stock values(5, 3, 3, 47);
+insert into stock values(6, 4, 1, 15);
+insert into stock values(7, 4, 5, 87);
+insert into stock values(8, 4, 6, 21);
+insert into stock values(9, 5, 8, 10);
+insert into stock values(10, 5, 9, 40);
+insert into stock values(11, 6, 3, 19);
+insert into stock values(12, 7, 4, 67);
+insert into stock values(13, 7, 5, 24);
+insert into stock values(14, 7, 6, 78);
+insert into stock values(15, 7, 9, 12);
+insert into stock values(16, 8, 10, 100);
+insert into stock values(17, 8, 2, 34);
+insert into stock values(18, 9, 10, 65);
+insert into stock values(19, 10, 3, 52);
+insert into stock values(20, 10, 6, 35);
+
+insert into distributor values ('E67836482', 'Distributor  Express', 'distributorexpress.com');
+insert into distributor values ('S03749282', 'Distributor Cool', 'distributorcool.com');
+insert into distributor values ('L29302839', 'Distributor Amazing', 'distributoramazing.com');
+insert into distributor values ('P57381723', 'Distributor Wonderful', 'distributorwonderful.com');
+insert into distributor values ('A17253946', 'Distributor Nice', 'distributornice.com');
+insert into distributor values ('H56754345', 'Distributor Good', 'distributorgood.com');
+insert into distributor values ('W87630284', 'Distributor Better', 'distributorbetter.com');
+insert into distributor values ('S28193728', 'Distributor 4U', 'distributor4u.com');
+insert into distributor values ('B76392730', 'Distributor Miracles', 'distributormiracles.com');
+insert into distributor values ('U12345678', 'Distributor Remedies', 'distributorremedies.com');
+
+insert into company values ('X67676482', 'Company Express', 'companyexpress.com');
+insert into company values ('R03745282', 'Company Cool', 'companycool.com');
+insert into company values ('G24302839', 'Company Amazing', 'companyamazing.com');
+insert into company values ('V53381793', 'Company Wonderful', 'companywonderful.com');
+insert into company values ('K17253546', 'Company Nice', 'companynice.com');
+insert into company values ('S677S8293', 'Company Good', 'companygood.com');
+insert into company values ('B87668084', 'Company Better', 'companybetter.com');
+insert into company values ('C36893728', 'Company 4U', 'company4u.com');
+insert into company values ('Q76692730', 'Company Miracles', 'companymiracles.com');
+insert into company values ('S15645678', 'Company Remedies', 'companyremedies.com');
+
+-- The products have categories describing the function of the gifts, and the description, how many sales have to be done in order for the pharmacy to gift them.
+
+insert into product values(1, 'Other', 'Ball', '5 sales', 'E67836482', 10);
+insert into product values(2, 'Self care', 'Shampoo', '10 sales', 'S03749282', 9);
+insert into product values(13, 'Self care', 'Shampoo', '10 sales', 'S03749282', 7);
+insert into product values(3, 'Other','Pen', '2 sales', 'L29302839', 8);
+insert into product values(12, 'Other','Pen', '2 sales', 'L29302839', 2);
+insert into product values(4, 'Self care', 'Hand cream', '15 sales', 'P57381723', 7);
+insert into product values(5, 'Self care', 'Lipstick', '20 sales', 'A17253946', 6);
+insert into product values(11, 'Self care', 'Lipstick', '20 sales', 'A17253946', 4);
+insert into product values(6,'Baby', 'Baby''s bottle', '20 sales', 'H56754345', 5);
+insert into product values(7, 'Baby', 'P', '10 sales', 'W87630284', 4);
+insert into product values(8, 'Other', 'Masks', '5 sales', 'S28193728', 3);
+insert into product values(9, 'Sweets', 'Candy', '3 sales', 'B76392730', 2);
+insert into product values(14, 'Sweets', 'Candy', '3 sales', 'B76392730', 1);
+insert into product values(10,'Self care', 'Conditioner', '15 sales', 'U12345678', 1);
+insert into product values(15,'Self care', 'Conditioner', '15 sales', 'U12345678', 5);
+
+insert into product_company values(1, 'X67676482');
+insert into product_company values(2, 'R03745282');
+insert into product_company values(3, 'G24302839');
+insert into product_company values(4, 'V53381793');
+insert into product_company values(5, 'K17253546');
+insert into product_company values(6, 'S677S8293');
+insert into product_company values(7, 'B87668084');
+insert into product_company values(8, 'C36893728');
+insert into product_company values(9, 'Q76692730');
+insert into product_company values(10, 'S15645678');
+insert into product_company values(11, 'X67676482');
+insert into product_company values(12, 'R03745282');
+insert into product_company values(13, 'G24302839');
+insert into product_company values(14, 'V53381793');
+insert into product_company values(15, 'K17253546');
+
+-- There were two considerations taken into account. First, that the difference between the order and delivery dates cannot be bigger than two, and that the employees belong to the
+-- specified pharmacy.
+
+insert into "ORDER" values(1, 1, 'U12345678', to_date('01/01/2020', 'dd/mm/yyyy'), 5, to_date('01/01/2020', 'dd/mm/yyyy'), 639357964);
+insert into "ORDER" values(1, 1, 'U12345678', to_date('12/05/2022', 'dd/mm/yyyy'), 30, to_date('13/05/2022', 'dd/mm/yyyy'), 639357964);
+insert into "ORDER" values(1, 1, 'U12345678', to_date('29/04/2022', 'dd/mm/yyyy'),20, to_date('30/04/2022', 'dd/mm/yyyy'), 639357964);
+insert into "ORDER" values(2, 2, 'B76392730', to_date('19/02/2018', 'dd/mm/yyyy'),34, to_date('20/02/2018', 'dd/mm/yyyy'), 639347964);
+insert into "ORDER" values(3, 3, 'S28193728', to_date('09/12/2021', 'dd/mm/yyyy'),56, to_date('10/12/2021', 'dd/mm/yyyy'), 964257964);
+insert into "ORDER" values(4, 4, 'W87630284', to_date('30/08/2019', 'dd/mm/yyyy'),12, to_date('30/08/2019', 'dd/mm/yyyy'), 639457964);
+insert into "ORDER" values(5, 5, 'H56754345', to_date('03/09/2022', 'dd/mm/yyyy'),1000, to_date('05/09/2022','dd/mm/yyyy'), 639308694);
+insert into "ORDER" values(6, 6, 'A17253946', to_date('23/11/2019', 'dd/mm/yyyy'),34, to_date('25/11/2019', 'dd/mm/yyyy'), 639386464);
+insert into "ORDER" values(6, 6, 'A17253946', to_date('13/05/2022', 'dd/mm/yyyy'), 12, to_date('14/05/2022', 'dd/mm/yyyy'), 639386464);
+insert into "ORDER" values(7, 7, 'P57381723', to_date('06/06/2006', 'dd/mm/yyyy'),98, to_date('07/06/2006','dd/mm/yyyy'), 639362864);
+insert into "ORDER" values(8, 8, 'L29302839', to_date('30/05/2019', 'dd/mm/yyyy'),76, to_date('01/06/2019', 'dd/mm/yyyy'), 639357964);
+insert into "ORDER" values(9, 9, 'S03749282', to_date('21/10/2020', 'dd/mm/yyyy'),45, to_date('23/10/2020', 'dd/mm/yyyy'), 635839964);
+insert into "ORDER" values(9, 9, 'S03749282', to_date('22/05/2022', 'dd/mm/yyyy'),30, to_date('23/05/2022', 'dd/mm/yyyy'), 635839964);
+insert into "ORDER" values(9, 9, 'S03749282', to_date('05/06/2022', 'dd/mm/yyyy'),45, to_date('05/06/2022', 'dd/mm/yyyy'), 635839964);
+insert into "ORDER" values(10, 10, 'E67836482', to_date('04/05/2021', 'dd/mm/yyyy'),12, to_date('05/05/2021', 'dd/mm/yyyy'), 697867964);

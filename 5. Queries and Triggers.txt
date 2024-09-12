@@ -1,0 +1,141 @@
+
+-- 5. Queries and trigger
+
+-- 1. Query1: Obtain the average number of medications per pharmacy.
+
+-- As the relationship between the pharmacies and medicines is stored in the stock table, this is the one where we have to search.
+-- As it asks for the average number of medicines per pharmacy, the average function has to be used and it has to be grouped by the pharmacy code.
+
+select 
+	pharmacy_code, 
+	avg(quantity) 
+from 
+	stock 
+group by 
+	pharmacy_code;
+
+
+-- 2. Query2: Get the number of employees per pharmacy for those who work in the pharmacy in the day
+-- shift. The query must return the identifier of the pharmacy, how many employees do you have
+-- assigned and the name, last name and Ssn of the employees.
+
+-- At the select we add the asked attributes and another subselect that will  give as a result the number of employees per pharmacy. That is why we have to equalize the pharmacy code
+-- of the first query to the one of the second one. Then, to look for the employees that work in the morning, we search in the shift table the name = morning and get the code of the
+-- employees that fulfill this requirement as they the ones that have to be shown. 
+
+select 
+	e.pharmacy_code, 
+	e.name, 
+	e.lastname, 
+	e.ssn, 
+	(select  
+		count(e2.ssn)
+	from 
+		employee e2, 
+		shift s2
+	where 
+		e.pharmacy_code = e2.pharmacy_code and e2.shift_code = s2.code and s2.name = 'Morning'
+	group by 
+		e2.pharmacy_code) as count
+from 
+	employee e, 
+	shift s
+where 
+	e.shift_code = s.code and s.name = 'Morning';
+
+
+-- 3. Query3: List the number of purchase orders from a pharmacy and order them by purchase order
+-- date. The query must return the purchase order identifier, the medication and the number of units
+-- requested.
+
+-- As the orders are identified (pk) by the pharmacy code, medicine code, distributor cif and order date, and the problem asks to get their idenfiers, they have to be included
+-- in the select. Also, it asks for the quantity. 
+-- The other thing the problem asks for, is to group them by pharmacy and order by order date. This can be done using the order by function first, by pharmacy to group them and then,
+-- by the date.
+
+select 
+	pharmacy_code, 
+	medicine_code,
+	distributor_cif,
+	order_date, 
+	quantity 
+from 
+	"ORDER"
+order by 
+	pharmacy_code, 
+	order_date;
+
+-- 4. Query4: Obtain the number of purchase orders made per pharmacy between May and June 2022.
+
+-- This final query requires the count(*) function, as it asks for the number of purchases between a determined date. In order to do that, we search in the order table and 
+-- include in where the between function with the specified dates (to make sure that the numbers are dates, the to_date is included), and it is grouped by pharmacy_code.
+
+select 
+	pharmacy_code, 
+	count(*)
+from 
+	"ORDER"
+where 
+	order_date between to_date('01/05/2022', 'dd/mm/yyyy') and to_date('30/06/2022', 'dd/mm/yyyy')
+group by 
+	pharmacy_code;
+
+-- TRIGGERS
+
+-- 1. Create a sequence to increase the id code in the TYPE_ADMINISTRATION table.
+
+-- First, the sequence is created
+
+create sequence seq_codetypeadmin;
+/
+
+-- To get to the next value of the sequence we can use the following command, however, that value is wasted and cannot be used
+select seq_codetypeadmin.nextval from dual;
+/
+
+-- Then, the trigger to assign the sequence to the type_administration table is created. It is going to assign the next value stored in the sequence to the new created tuple. 
+
+create or replace trigger tg_codetypeadmin
+before insert
+on type_administration
+for each row
+begin
+	select seq_codetypeadmin.nextval into :new.code from dual;
+end;
+/
+-- 2. Create a sequence to increase the id code in the MEDICINE table.
+
+-- The same steps as before have to be applied to the sequence of the medicine table
+
+create sequence seq_codemedicine;
+/
+create or replace trigger tg_codemedicine
+before insert
+on medicine
+for each row
+begin
+	select seq_codemedicine.nextval into :new.code from dual;
+end;
+/
+-- 3. Trigger: Create a trigger when there are less than 3 units left in the stock insert a new order for the
+-- medicine to one distributor in table ORDER.
+
+-- The trigger has to be after insert or update as every time the stock table is altered, this trigger has to activate. 
+-- The trigger needs to check if the quantity of the medicine is less than 3. If that happens, a new row has to be inserted in the order table. This table has as attributes
+-- the pharmacy code and medicine code, which are the ones obtained from the inserted or updated row. Then, we add a distributor code and, as we need to obtain the date of the   
+-- order, we use the actual date with the sysdate function, and we have to trunc it so it does not give the hour too. Then, we add the quantity and the date of the delivery as the
+-- following day. After that, the employee, that must be the manager of the pharmacy, is included using a query. First, the variable is declared in the declare section and
+-- then the query searches for the super_ssn in the pharmacy where the pharmacy code is equal to the one of the inserted or updated row.
+
+create or replace trigger lab_tg1_stock_aiu
+after insert or update
+on stock
+for each row
+declare
+    employee_ssn employee.ssn%type;
+begin
+	if :new.quantity < 3 then
+    		select min(super_ssn) into employee_ssn from employee where pharmacy_code in :new.pharmacy_code;
+    		insert into "ORDER" values(:new.pharmacy_code, :new.medicine_code, 'U12345678', trunc(sysdate), 50, trunc(sysdate) + 1, employee_ssn);
+	end if;
+end;

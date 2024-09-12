@@ -1,0 +1,39 @@
+-- 4. Creation of FK constraints.
+
+-- The foreign keys that were described with arrows in the schema are created below.
+
+alter table pharmacy add constraint pharmacy_fk0 foreign key (schedule_code) references schedule(code);
+alter table pharmacy add constraint pharmacy_fk1 foreign key (catalogue_code) references catalogue(code);
+
+alter table pharmacy_phone add constraint pharmacy_phone_fk0 foreign key (pharmacy_code) references pharmacy(code);
+
+alter table laboratory_phone add constraint laboratory_phone_fk0 foreign key (lab_name) references laboratory(name);
+
+alter table employee add constraint employee_fk0 foreign key (super_ssn) references employee(ssn);
+alter table employee add constraint employee_fk1 foreign key (pharmacy_code) references pharmacy(code);
+alter table employee add constraint employee_fk2 foreign key (shift_code) references shift(code);
+
+alter table medicine add constraint medicine_fk0 foreign key (lab_name) references laboratory("NAME");
+alter table medicine add constraint medicine_fk1 foreign key (type_excipient) references type_excipient(code);
+alter table medicine add constraint medicine_fk2 foreign key (type_admin_code) references type_administration(code);
+
+alter table medicine_type_excipient add constraint medicine_type_excipient_fk0 foreign key (type_excipient) references type_excipient(code);
+alter table medicine_type_excipient add constraint medicine_type_excipient_fk1 foreign key (medicine_code) references medicine(code);
+
+alter table stock add constraint stock_fk0 foreign key (medicine_code) references medicine(code);
+alter table stock add constraint stock_fk1 foreign key (pharmacy_code) references pharmacy(code);
+
+alter table medicine_active_ingredients add constraint medicine_active_ingredients_fk0 foreign key (medicine_code) references medicine(code);
+alter table medicine_active_ingredients add constraint medicine_active_ingredients_fk1 foreign key (active_ingredient_code) references active_ingredients(code);
+
+alter table "ORDER" add constraint order_fk0 foreign key (pharmacy_code) references pharmacy(code);
+alter table "ORDER" add constraint order_fk1 foreign key (medicine_code) references medicine(code);
+alter table "ORDER" add constraint order_fk2 foreign key (distributor_cif) references distributor(cif);
+alter table "ORDER" add constraint order_fk3 foreign key (employee_code) references employee(ssn);
+
+alter table product add constraint product_fk0 foreign key (catalogue_code) references catalogue(code);
+alter table product add constraint product_fk1 foreign key (distributor_name) references distributor(cif);
+
+alter table product_company add constraint product_company_fk0 foreign key (product_code) references product(code);
+alter table product_company add constraint product_company_fk1 foreign key (company_code) references company(cif);
+

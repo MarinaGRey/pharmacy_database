@@ -1,0 +1,25 @@
+-- 2. Deletion of the tables.
+
+-- The deletion of the tables requires to add the cascade so as to not have problems with the constraints created before
+
+drop table pharmacy cascade constraints;
+drop table pharmacy_phone cascade constraints;
+drop table laboratory_phone cascade constraints;
+drop table employee cascade constraints;
+drop table shift cascade constraints;
+drop table schedule cascade constraints;
+drop table medicine cascade constraints;
+drop table type_administration cascade constraints;
+drop table type_excipient cascade constraints;
+drop table laboratory cascade constraints;
+drop table medicine_type_excipient cascade constraints;
+drop table stock cascade constraints;
+drop table medicine_active_ingredients cascade constraints;
+drop table table_active_ingredients cascade constraints;
+drop table distributor cascade constraints;
+drop table "ORDER" cascade constraints;
+drop table catalogue cascade constraints;
+drop table product cascade constraints;
+drop table product_company cascade constraints;
+drop table company cascade constraints;
+drop table active_ingredients cascade constraints;
