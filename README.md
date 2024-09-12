@@ -10,10 +10,6 @@ This project was made in collaboration with [mariamagro](https://github.com/mari
 - [Constraints](#constraints)
 - [Triggers](#triggers)
 - [Queries](#queries)
-- [Installation](#installation)
-- [Usage](#usage)
-- [Contributing](#contributing)
-- [License](#license)
 
 ## Introduction
 This database system is designed for a pharmacy and includes tables for medications, employees, pharmacies, laboratories, suppliers, and orders. The system includes predefined constraints and triggers to ensure data integrity and automate stock replenishment processes.
